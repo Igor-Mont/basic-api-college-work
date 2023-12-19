@@ -7,10 +7,17 @@ export class ConflictExceptionResponse {
     description: 'HTTP Status code',
   })
   statusCode: number;
+
   @ApiProperty({
     example: 'O registro já existe.',
   })
   message: string;
+
+  @ApiProperty({
+    example: 'Conflict',
+    description: 'HTTP Error.',
+  })
+  error: string;
 }
 
 export class ConflictException extends HttpException {

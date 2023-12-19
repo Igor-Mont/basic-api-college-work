@@ -1,7 +1,13 @@
-import { Controller, Post, Body, HttpStatus, Get } from '@nestjs/common';
+import { Controller, Post, Body, Get } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
-import { ApiBody, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
+import {
+  ApiBody,
+  ApiConflictResponse,
+  ApiOkResponse,
+  ApiOperation,
+  ApiTags,
+} from '@nestjs/swagger';
 import { User } from './entities/user.entity';
 
 import { ConflictExceptionResponse } from 'src/http/exceptions/conflict.exception';
@@ -9,19 +15,17 @@ import { ConflictExceptionResponse } from 'src/http/exceptions/conflict.exceptio
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
-  @ApiTags('users')
+  @ApiTags('Users')
   @ApiOperation({ summary: 'Criar um novo usuário.' })
   @ApiBody({
     type: CreateUserDto,
     description: 'Dados do usuário a ser criado.',
   })
-  @ApiResponse({
-    status: HttpStatus.CREATED,
+  @ApiOkResponse({
     description: 'O usuário foi criado com sucesso.',
     type: User,
   })
-  @ApiResponse({
-    status: HttpStatus.CONFLICT,
+  @ApiConflictResponse({
     description: 'Registro já existe.',
     type: ConflictExceptionResponse,
   })
@@ -32,8 +36,7 @@ export class UsersController {
 
   @ApiTags('users')
   @ApiOperation({ summary: 'Listar todos os usuários.' })
-  @ApiResponse({
-    status: HttpStatus.OK,
+  @ApiOkResponse({
     description: 'Operação realizada com sucesso.',
     type: User,
     isArray: true,
