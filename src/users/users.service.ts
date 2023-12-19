@@ -16,4 +16,8 @@ export class UsersService {
   findByCPF(cpf: number): User | undefined {
     return this.users.find((user) => user.cpf === cpf);
   }
+
+  findAll(): User[] {
+    return [...this.users];
+  }
 }
