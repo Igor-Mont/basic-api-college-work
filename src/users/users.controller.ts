@@ -30,6 +30,14 @@ export class UsersController {
     return this.usersService.create(createUserDto);
   }
 
+  @ApiTags('users')
+  @ApiOperation({ summary: 'Listar todos os usuários.' })
+  @ApiResponse({
+    status: HttpStatus.OK,
+    description: 'Operação realizada com sucesso.',
+    type: User,
+    isArray: true,
+  })
   @Get()
   findAll(): User[] {
     return this.usersService.findAll();
