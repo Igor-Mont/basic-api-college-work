@@ -7,8 +7,10 @@ import {
   Validate,
 } from 'class-validator';
 import { IsValidCPF } from '../validators/valid-cpf-validator';
+import { ApiProperty } from '@nestjs/swagger';
 
 export class CreateUserDto {
+  @ApiProperty({ example: 1174571080 })
   @IsNotEmpty({
     message: 'O CPF do usuário não pode ser vazio.',
   })
@@ -23,6 +25,11 @@ export class CreateUserDto {
   })
   cpf: number;
 
+  @ApiProperty({
+    example: 'Igor Nathan Monteiro Santos',
+    minLength: 3,
+    maxLength: 50,
+  })
   @IsNotEmpty({
     message: 'O nome do usuário não pode ser vazio.',
   })
@@ -34,6 +41,10 @@ export class CreateUserDto {
   })
   nome: string;
 
+  @ApiProperty({
+    example: '2023-12-19T10:59:56Z',
+    description: 'Data de nascimento no formato ISO 8601',
+  })
   @IsNotEmpty({
     message: 'A data de nascimento do usuário não pode ser vazia.',
   })
