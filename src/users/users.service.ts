@@ -1,4 +1,8 @@
-import { ConflictException, Injectable } from '@nestjs/common';
+import {
+  ConflictException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { User } from './entities/user.entity';
 
@@ -19,5 +23,16 @@ export class UsersService {
 
   findAll(): User[] {
     return [...this.users];
+  }
+
+  findById(id: string): User {
+    const user = this.users.find((user) => user.id === id);
+
+    if (!user)
+      throw new NotFoundException(
+        'Usuário não está cadastrado na base de dados.',
+      );
+
+    return user;
   }
 }

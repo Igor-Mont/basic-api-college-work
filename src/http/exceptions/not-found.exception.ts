@@ -1,19 +1,19 @@
 import { ApiProperty } from '@nestjs/swagger';
 
-export class ConflictExceptionResponse {
+export class NotFoundExceptionResponse {
   @ApiProperty({
-    example: 409,
+    example: 404,
     description: 'HTTP Status Code.',
   })
   statusCode: number;
 
   @ApiProperty({
-    example: 'O registro já existe.',
+    example: 'O registro não foi encontrado.',
   })
   message: string;
 
   @ApiProperty({
-    example: 'Conflict',
+    example: 'Not found.',
     description: 'HTTP Error.',
   })
   error: string;
