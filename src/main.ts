@@ -13,7 +13,7 @@ async function bootstrap() {
   );
 
   const config = new DocumentBuilder()
-    .setTitle('Very simple API')
+    .setTitle('API Docs')
     .setDescription(
       'Very simple API with only get and post routes for initial work in the Database discipline at UFS.',
     )
@@ -21,7 +21,7 @@ async function bootstrap() {
     .build();
 
   const document = SwaggerModule.createDocument(app, config);
-  SwaggerModule.setup('api', app, document);
+  SwaggerModule.setup('api-docs', app, document);
 
   await app.listen(3000);
 }
